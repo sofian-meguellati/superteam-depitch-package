@@ -450,34 +450,40 @@
             window.scrollY > 40 ? 'rgba(255,255,255,.07)' : 'rgba(255,255,255,.04)';
     });
 
-    // Balance tweet columns by rendered height
+    // Balance tweet columns by rendered height, preserving date order within each col
     function balanceTweetCols() {
         const grid = document.querySelector('.tweets-wall-grid');
         if (!grid) return;
-        const tweets = Array.from(grid.querySelectorAll('blockquote.twitter-tweet, .twitter-tweet-rendered'));
-        if (tweets.length === 0) return;
         const cols = Array.from(grid.children);
         if (cols.length !== 3) return;
-        // Collect all tweet elements from all cols
+        // Collect all tweets with their tweet ID (= date proxy)
         const all = [];
-        cols.forEach(col => all.push(...Array.from(col.children)));
+        cols.forEach(col => Array.from(col.children).forEach(tw => {
+            const link = tw.querySelector('a') || tw;
+            const href = link.href || tw.getAttribute('data-tweet-id') || '';
+            const idMatch = href.match(/status\/(\d+)/);
+            const id = idMatch ? BigInt(idMatch[1]) : 0n;
+            all.push({ el: tw, id, h: tw.offsetHeight || 200 });
+        }));
         if (all.length === 0) return;
+        // Sort all tweets by ID descending (most recent first)
+        all.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0));
         // Clear cols
         cols.forEach(col => col.innerHTML = '');
-        // Greedy: assign each tweet to shortest col
+        // Greedy: assign each tweet (in date order) to shortest col
         const heights = [0, 0, 0];
-        all.forEach(tw => {
+        all.forEach(({ el, h }) => {
             const min = heights.indexOf(Math.min(...heights));
-            cols[min].appendChild(tw);
-            heights[min] += tw.offsetHeight || 200;
+            cols[min].appendChild(el);
+            heights[min] += h;
         });
     }
 
     // Run after Twitter widgets render
     if (window.twttr) {
-        twttr.ready(() => twttr.events.bind('rendered', () => setTimeout(balanceTweetCols, 300)));
+        twttr.ready(() => twttr.events.bind('rendered', () => setTimeout(balanceTweetCols, 500)));
     } else {
-        window.addEventListener('load', () => setTimeout(balanceTweetCols, 3000));
+        window.addEventListener('load', () => setTimeout(balanceTweetCols, 4000));
     }
 </script>
 </body>
