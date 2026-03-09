@@ -73,7 +73,7 @@
         .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 60px}
 
         /* Navbar */
-        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,8,.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.04)}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 60px;padding-top:max(18px,env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,8,.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.04)}
         .nav-logo{font-family:'Satoshi',sans-serif;font-weight:900;font-size:1.1rem;color:var(--green);text-shadow:0 0 20px rgba(247,43,138,.4)}
         .nav-cta{background:var(--green);color:var(--bg);font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;padding:9px 22px;border-radius:8px;border:none;cursor:pointer;text-decoration:none;transition:all .2s;animation:glow-pulse 3s ease-in-out infinite}
         .nav-cta:hover{transform:translateY(-1px)}
@@ -129,13 +129,17 @@
         .reveal.visible{opacity:1;transform:translateY(0)}
 
         @media(max-width:900px){
-            nav{padding:16px 24px}
+            nav{padding:16px 24px;top:0;margin:0}
+            body{padding-top:0}
             section{padding:80px 24px}
             .divider{margin:0 24px}
             h1,.hero-title{font-size:2.8rem}
             h2{font-size:1.8rem}
             .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
             footer{flex-direction:column;gap:16px;padding:32px 24px;text-align:center}
+            .tweets-wall-grid{flex-direction:column !important}
+            .tweets-wall-grid > div{flex:none !important;width:100%}
+            section[style*="padding:80px 60px"]{padding:60px 16px !important}
         }
     </style>
 </head>
@@ -371,7 +375,7 @@
             <div class="tag pink-tag">Straight from the builders</div>
             <h2>Real feedback, <span class="pink">unfiltered.</span></h2>
         </div>
-        <div style="display:flex;gap:24px;align-items:flex-start">
+        <div class="tweets-wall-grid" style="display:flex;gap:24px;align-items:flex-start">
             <!-- Col 1: indices 0,3,6,9,12,15,18,21,24,27,30,33,36,39 -->
             <div style="flex:1;display:flex;flex-direction:column;gap:16px">
                 <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true" data-conversation="none"><a href="https://twitter.com/CryptoEights/status/2030538254249033825"></a></blockquote>
