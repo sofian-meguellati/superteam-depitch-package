@@ -118,12 +118,23 @@
         .price-card{background:var(--card);border-radius:20px;padding:48px;position:relative;overflow:hidden;text-align:center}
         .price-card::before{content:'';position:absolute;inset:-1px;border-radius:20px;padding:2px;background:linear-gradient(135deg,var(--green),var(--purple));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
         .price-card::after{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(247,43,138,.05);filter:blur(60px)}
+        /* Purple card (Live) */
         .price-card.purple-card::before{background:linear-gradient(135deg,var(--purple),var(--blue))}
         .price-card.purple-card::after{background:rgba(168,85,247,.08)}
         .price-card.purple-card .checklist li::before{color:var(--purple)}
         .price-card.purple-card .glow-green{color:var(--purple);text-shadow:0 0 40px rgba(168,85,247,.5),0 0 80px rgba(168,85,247,.2)}
         .price-card.purple-card .btn-primary{background:linear-gradient(135deg,var(--purple),var(--blue));box-shadow:0 4px 24px rgba(168,85,247,.4)}
         .price-card.purple-card .btn-primary:hover{box-shadow:0 4px 32px rgba(168,85,247,.6)}
+        /* Blue card (Hackathon) */
+        .price-card.blue-card::before{background:linear-gradient(135deg,var(--blue),#6366f1)}
+        .price-card.blue-card::after{background:rgba(14,165,233,.08)}
+        .price-card.blue-card .checklist li::before{color:var(--blue)}
+        .price-card.blue-card .glow-green{color:var(--blue);text-shadow:0 0 40px rgba(14,165,233,.5),0 0 80px rgba(14,165,233,.2)}
+        .price-card.blue-card .btn-primary{background:linear-gradient(135deg,var(--blue),#6366f1);box-shadow:0 4px 24px rgba(14,165,233,.4)}
+        .price-card.blue-card .btn-primary:hover{box-shadow:0 4px 32px rgba(14,165,233,.6)}
+        .price-card.blue-card .checklist .highlight{background:linear-gradient(135deg,rgba(14,165,233,.15),rgba(14,165,233,.05));border-color:rgba(14,165,233,.3)}
+        /* Best seller badge */
+        .best-seller{position:absolute;top:0;left:50%;transform:translateX(-50%);background:var(--green);color:var(--bg);font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;padding:6px 20px;border-radius:0 0 10px 10px;letter-spacing:.1em;text-transform:uppercase;z-index:2}
         .checklist .highlight{color:#fff;font-weight:600;background:linear-gradient(135deg,rgba(247,43,138,.15),rgba(247,43,138,.05));border:1px solid rgba(247,43,138,.3);border-radius:8px;padding:8px 12px;margin:-2px -12px}
         .price-value{font-family:'JetBrains Mono',monospace;font-size:5rem;font-weight:900;line-height:1;margin-bottom:4px}
         .price-currency{font-family:'JetBrains Mono',monospace;font-size:1.8rem;color:var(--muted);font-weight:400}
@@ -282,20 +293,38 @@
             <div class="tag purple-tag">Pricing</div>
             <h2>Choose your <span class="glow-purple">package.</span></h2>
         </div>
-        <div class="grid-2 reveal" style="gap:28px;max-width:900px;margin:0 auto;align-items:start">
+        <div class="grid-3 reveal" style="gap:28px;max-width:1100px;margin:0 auto;align-items:start">
 
-            <!-- Essentials — 1,999 -->
+            <!-- Live — 999 -->
             <div class="price-card purple-card">
+                <div style="position:relative;z-index:1">
+                    <div class="tag" style="margin-bottom:24px">Colosseum Live</div>
+                    <div style="margin-bottom:6px">
+                        <span class="price-currency">USDC </span><span class="price-value glow-green">999</span>
+                    </div>
+                    <ul class="checklist" style="text-align:left;max-width:420px;margin:0 auto 36px">
+                        <li>1× DePitch online masterclass</li>
+                        <li>1× online group pitch roast before Demo Day</li>
+                        <li>1× Legends Build product launch program for all your members</li>
+                        <li>1× «&nbsp;community of the week&nbsp;» spotlight on Legends.fun</li>
+                    </ul>
+                    <a href="https://t.me/depitchsofian" class="btn-primary">Get the Package &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Essentials — 2,999 -->
+            <div class="price-card" style="transform:scale(1.04)">
+                <div class="best-seller">Best Seller</div>
                 <div style="position:relative;z-index:1">
                     <div class="tag" style="margin-bottom:24px">Colosseum Essentials</div>
                     <div style="margin-bottom:6px">
-                        <span class="price-currency">USDC </span><span class="price-value glow-green">1,999</span>
+                        <span class="price-currency">USDC </span><span class="price-value glow-green">2,999</span>
                     </div>
-                    <p style="color:var(--muted);margin-bottom:36px;font-size:.9rem">One-time. For Superteam builders.</p>
                     <ul class="checklist" style="text-align:left;max-width:420px;margin:0 auto 36px">
                         <li>1× DePitch online masterclass</li>
                         <li>1× sofian-depitch.md pitch building skill</li>
                         <li>Up to 15× async pitch roast reviews</li>
+                        <li class="highlight">Up to 5× 30-min 1:1 pitch coaching sessions</li>
                         <li>1× Legends Build product launch program for all your members</li>
                         <li>1× «&nbsp;community of the week&nbsp;» spotlight on Legends.fun</li>
                     </ul>
@@ -304,13 +333,12 @@
             </div>
 
             <!-- Full Package — 4,999 -->
-            <div class="price-card">
+            <div class="price-card blue-card">
                 <div style="position:relative;z-index:1">
                     <div class="tag" style="margin-bottom:24px">Colosseum Hackathon Package</div>
                     <div style="margin-bottom:6px">
                         <span class="price-currency">USDC </span><span class="price-value glow-green">4,999</span>
                     </div>
-                    <p style="color:var(--muted);margin-bottom:36px;font-size:.9rem">One-time. For Superteam builders.</p>
                     <ul class="checklist" style="text-align:left;max-width:420px;margin:0 auto 36px">
                         <li>1× DePitch online masterclass</li>
                         <li>1× sofian-depitch.md pitch building skill</li>
